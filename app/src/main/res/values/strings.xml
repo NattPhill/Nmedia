@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Nmedia</string>
-    <string name="nmedia">NMedia!</string>
+    <string name="nmedia">Нетология. Университет интернет-профессий будущего</string>
+    <string name="info" translatable="false">"Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогает расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb "</string>
+    <string name="date" translatable="false">21 мая в 18:36</string>
+    <string name="likes" translatable="false">10</string>
+    <string name="views" translatable="false">5</string>
+    <string name="share">5</string>
 </resources>
