@@ -5,5 +5,5 @@
     <string name="date" translatable="false">21 мая в 18:36</string>
     <string name="likes" translatable="false">10</string>
     <string name="views" translatable="false">5</string>
-    <string name="share">5</string>
+    <string name="share" translatable="false">5</string>
 </resources>
