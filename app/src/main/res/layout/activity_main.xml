@@ -17,14 +17,14 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/nmedia"
-        app:layout_constraintBottom_toTopOf="@+id/date"
+        app:layout_constraintBottom_toTopOf="@+id/published"
         app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintStart_toEndOf="@+id/logo"
         app:layout_constraintTop_toTopOf="@+id/logo"
@@ -35,29 +35,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintBottom_toBottomOf="@+id/author"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/author"
         app:srcCompat="@drawable/baseline_more_vert_24" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
         app:layout_constraintBottom_toBottomOf="@+id/logo"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintStart_toStartOf="@+id/author"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="logo,name,date" />
+        app:constraint_referenced_ids="logo,author,published" />
 
     <TextView
-        android:id="@+id/info"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -74,16 +74,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="info" />
+        app:constraint_referenced_ids="content" />
 
     <ImageButton
         android:id="@+id/likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/like_2" />
 
     <TextView
@@ -100,11 +100,11 @@
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@+id/numberOfLikes"
-        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="?attr/actionModeShareDrawable" />
 
     <TextView
@@ -125,7 +125,7 @@
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/numberOfViews"
-        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/baseline_visibility_24" />
 
     <TextView
@@ -136,5 +136,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/views"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/views" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
