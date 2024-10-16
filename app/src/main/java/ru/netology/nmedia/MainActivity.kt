@@ -5,45 +5,55 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlin.math.floor
+
+data class Post(
+    var isLiked: Boolean = false,
+    var likesCount: Int = 16899,
+    var sharesCount: Int = 0
+)
 
 class MainActivity : AppCompatActivity() {
 
-    private var isLiked = false
-    private var likesCount = 999
-    private var sharesCount = 0
+    private var post = Post()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Инициализация кнопок и текстовых полей через findViewById
-        val likesButton: ImageButton = findViewById(R.id.likes)
-        val shareButton: ImageButton = findViewById(R.id.share)
-        val numberOfLikesTextView: TextView = findViewById(R.id.numberOfLikes)
-        val numberOfSharesTextView: TextView = findViewById(R.id.numberOfShare)
+        binding.root.setOnClickListener {
+            println("клик на root")
+        }
+
+        binding.avatar.setOnClickListener {
+            println("клик на avatar")
+        }
 
         // Установка начальных значений
-        updateLikes(likesButton, numberOfLikesTextView)
-        updateShares(numberOfSharesTextView)
+        updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
 
         // Обработка клика на лайк
-        likesButton.setOnClickListener {
-            isLiked = !isLiked
-            if (isLiked) {
-                likesCount++
+        binding.like.setOnClickListener {
+            post.isLiked = !post.isLiked
+            if (post.isLiked) {
+                post.likesCount++
             } else {
-                likesCount--
+                post.likesCount--
             }
-            updateLikes(likesButton, numberOfLikesTextView)
+            updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
         }
 
         // Обработка клика на кнопку share
-        shareButton.setOnClickListener {
-            sharesCount++
-            updateShares(numberOfSharesTextView)
+        binding.share.setOnClickListener {
+            println("клик на share")
+            post.sharesCount++
+            updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -53,27 +63,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // обновление числа лайков и смена иконки
-    private fun updateLikes(likesButton: ImageButton, numberOfLikesTextView: TextView) {
-        if (isLiked) {
+    // обновление числа лайков и смена иконки, числа шарингов
+    private fun updateUI(likesButton: ImageButton, numberOfLikesTextView: TextView, numberOfSharesTextView: TextView) {
+        if (post.isLiked) {
             likesButton.setImageResource(R.drawable.liked)
         } else {
             likesButton.setImageResource(R.drawable.like_2)
         }
-        numberOfLikesTextView.text = formatCount(likesCount)
-    }
-
-    // обновлениe числа шарингов
-    private fun updateShares(numberOfSharesTextView: TextView) {
-        numberOfSharesTextView.text = formatCount(sharesCount)
+        numberOfLikesTextView.text = formatCount(post.likesCount)
+        numberOfSharesTextView.text = formatCount(post.sharesCount)
     }
 
     // форматирование числа
     private fun formatCount(count: Int): String {
         return when {
-            count >= 1_000_000 -> String.format("%.1fM", count / 1_000_000.0)
-            count >= 10_000 -> String.format("%dK", count / 1_000)
-            count >= 1_100 -> String.format("%.1fK", count / 1_000.0)
+            count >= 1_000_000 -> String.format("%.1fM", floor(count / 100_000.0) / 10)
+            count >= 1_100 -> String.format("%.1fK", floor(count / 100.0) /10)
             count >= 1_000 -> String.format("%dK", count / 1_000)
             else -> count.toString()
         }

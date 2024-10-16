@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/avatar"
         android:layout_width="75dp"
         android:layout_height="75dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +25,13 @@
         android:maxLines="1"
         android:text="@string/nmedia"
         app:layout_constraintBottom_toTopOf="@+id/published"
-        app:layout_constraintEnd_toStartOf="@+id/menu"
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="@+id/logo"
+        app:layout_constraintEnd_toStartOf="@+id/more"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toTopOf="@+id/avatar"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageButton
-        android:id="@+id/menu"
+        android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toStartOf="@+id/author"
         app:layout_constraintTop_toBottomOf="@+id/author" />
 
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="logo,author,published" />
+        app:constraint_referenced_ids="avatar,author,published" />
 
     <TextView
         android:id="@+id/content"
@@ -77,7 +77,7 @@
         app:constraint_referenced_ids="content" />
 
     <ImageButton
-        android:id="@+id/likes"
+        android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -92,9 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/likes"
-        app:layout_constraintBottom_toBottomOf="@+id/likes"
-        app:layout_constraintStart_toEndOf="@+id/likes"
-        app:layout_constraintTop_toTopOf="@+id/likes" />
+        app:layout_constraintBottom_toBottomOf="@+id/like"
+        app:layout_constraintStart_toEndOf="@+id/like"
+        app:layout_constraintTop_toTopOf="@+id/like" />
 
     <ImageButton
         android:id="@+id/share"
