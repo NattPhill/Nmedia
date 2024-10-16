@@ -12,7 +12,7 @@ import kotlin.math.floor
 
 data class Post(
     var isLiked: Boolean = false,
-    var likesCount: Int = 16899,
+    var likesCount: Int = 9999,
     var sharesCount: Int = 0
 )
 
@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
     private fun formatCount(count: Int): String {
         return when {
             count >= 1_000_000 -> String.format("%.1fM", floor(count / 100_000.0) / 10)
-            count >= 1_100 -> String.format("%.1fK", floor(count / 100.0) /10)
-            count >= 1_000 -> String.format("%dK", count / 1_000)
+            count >= 10_000 -> String.format("%dK", count / 1_000)
+            count >= 1_000 -> String.format("%.1fK", floor(count / 100.0) /10)
             else -> count.toString()
         }
     }
