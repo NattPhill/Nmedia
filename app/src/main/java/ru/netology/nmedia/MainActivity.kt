@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import kotlin.math.floor
 
 class MainActivity : AppCompatActivity() {
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     // Обновляем UI при изменении данных
     fun updateUI(post: Post) {
-        binding.like.setImageResource(if (post.isLiked) R.drawable.liked else R.drawable.like_2)
+        binding.like.setImageResource(if (post.likedByMe) R.drawable.liked else R.drawable.like_2)
         binding.numberOfLikes.text = formatCount(post.likesCount)
         binding.numberOfShare.text = formatCount(post.sharesCount)
     }
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         return when {
             count >= 1_000_000 -> String.format("%.1fM", floor(count / 100_000.0) / 10)
             count >= 10_000 -> String.format("%dK", count / 1_000)
-            count >= 1_000 -> String.format("%.1fK", floor(count / 100.0) /10)
+            count >= 1_000 -> String.format("%.1fK", floor(count / 100.0) / 10)
             else -> count.toString()
         }
     }
