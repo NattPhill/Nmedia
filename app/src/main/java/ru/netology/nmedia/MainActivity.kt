@@ -1,25 +1,19 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import kotlin.math.floor
-
-data class Post(
-    var isLiked: Boolean = false,
-    var likesCount: Int = 9999,
-    var sharesCount: Int = 0
-)
 
 class MainActivity : AppCompatActivity() {
 
-    private var post = Post()
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: PostViewModel by viewModels() // Создаем ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,25 +29,18 @@ class MainActivity : AppCompatActivity() {
             println("клик на avatar")
         }
 
-        // Установка начальных значений
-        updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
+        // Подписываемся на изменения в данных
+        viewModel.post.observe(this, Observer { post ->
+            updateUI(post)
+        })
 
-        // Обработка клика на лайк
+        // Добавляем обработчики кликов
         binding.like.setOnClickListener {
-            post.isLiked = !post.isLiked
-            if (post.isLiked) {
-                post.likesCount++
-            } else {
-                post.likesCount--
-            }
-            updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
+            viewModel.onLikeClicked() // Вызываем обработку клика на лайк
         }
 
-        // Обработка клика на кнопку share
         binding.share.setOnClickListener {
-            println("клик на share")
-            post.sharesCount++
-            updateUI(binding.like, binding.numberOfLikes, binding.numberOfShare)
+            viewModel.onShareClicked() // Вызываем обработку клика на share
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -63,15 +50,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // обновление числа лайков и смена иконки, числа шарингов
-    private fun updateUI(likesButton: ImageButton, numberOfLikesTextView: TextView, numberOfSharesTextView: TextView) {
-        if (post.isLiked) {
-            likesButton.setImageResource(R.drawable.liked)
-        } else {
-            likesButton.setImageResource(R.drawable.like_2)
-        }
-        numberOfLikesTextView.text = formatCount(post.likesCount)
-        numberOfSharesTextView.text = formatCount(post.sharesCount)
+    // Обновляем UI при изменении данных
+    fun updateUI(post: Post) {
+        binding.like.setImageResource(if (post.likedByMe) R.drawable.liked else R.drawable.like_2)
+        binding.numberOfLikes.text = formatCount(post.likesCount)
+        binding.numberOfShare.text = formatCount(post.sharesCount)
     }
 
     // форматирование числа
@@ -79,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         return when {
             count >= 1_000_000 -> String.format("%.1fM", floor(count / 100_000.0) / 10)
             count >= 10_000 -> String.format("%dK", count / 1_000)
-            count >= 1_000 -> String.format("%.1fK", floor(count / 100.0) /10)
+            count >= 1_000 -> String.format("%.1fK", floor(count / 100.0) / 10)
             else -> count.toString()
         }
     }
