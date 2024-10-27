@@ -1,17 +1,21 @@
 package ru.netology.nmedia
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val post: LiveData<Post> = repository.get()
+    private val _data = MutableLiveData(repository.getAll())
+    val data: LiveData<List<Post>> = _data
 
-    fun onLikeClicked() {
-        repository.like()
+    fun onLikeClicked(id: Long) {
+        repository.likeById(id)
+        _data.value = repository.getAll()
     }
 
-    fun onShareClicked() {
-        repository.share()
+    fun onShareClicked(id: Long) {
+        repository.shareById(id)
+        _data.value = repository.getAll()
     }
 }
