@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
             }
             binding.editingPanel.visibility = View.VISIBLE
 
-            val cancelEditing: View = findViewById(R.id.editingPanel)
-            val cancelButton: ImageButton = findViewById(R.id.cancelButton)
+            val cancelEditing: View = binding.editingPanel
+            val cancelButton: ImageButton = binding.cancelButton
 
             cancelButton.setOnClickListener {
                 binding.editingPanel.visibility = View.GONE     //скрыть окно

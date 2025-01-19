@@ -9,10 +9,9 @@
     <string name="hint">Введите текст</string>
     <string name="edit">Редактировать</string>
     <string name="remove">Удалить</string>
-    <string name="editText">Редактирование</string>
-    <string name="edit_icon">edit_icon</string>
+    <string name="editText" translatable="false">Редактирование</string>
+    <string name="edit_icon" translatable="false">edit_icon</string>
     <string name="editing">Редактирование</string>
-    <string name="Р">Редактирование</string>
-    <string name="sample_text">sample_text</string>
+    <string name="sample_text" translatable="false">sample_text</string>
     <string name="cancel">cancel</string>
 </resources>
