@@ -12,27 +12,28 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/barrier"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp"
         tools:listitem="@layout/card_post" />
 
     <FrameLayout
         android:id="@+id/editingPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/newContent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/white"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"            >
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -41,79 +42,56 @@
                 android:orientation="horizontal"
                 android:padding="4dp">
 
-            <ImageView
-                android:id="@+id/editIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/edit_icon"
-                android:src="@android:drawable/ic_menu_edit" />
+                <ImageView
+                    android:id="@+id/editIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/edit_icon"
+                    android:src="@android:drawable/ic_menu_edit" />
 
-            <!-- Текст "редактирование" -->
-            <TextView
-                android:id="@+id/editTextLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="8dp"
-                android:text="@string/editing"
-                android:textStyle="bold" />
+                <!-- Текст "редактирование" -->
+                <TextView
+                    android:id="@+id/editTextLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="8dp"
+                    android:text="@string/editing"
+                    android:textStyle="bold" />
 
-            <!-- Кнопка отмены -->
-            <ImageButton
-                android:id="@+id/cancelButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/cancel"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
-        </LinearLayout>
+                <!-- Кнопка отмены -->
+                <ImageButton
+                    android:id="@+id/cancelButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/cancel"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            </LinearLayout>
 
             <!--Начало редактируемого текста -->
             <TextView
                 android:id="@+id/editionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/sample_text"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginEnd="8dp" />
+                android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/newContent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:hint="@string/hint"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/newContent"
-        app:srcCompat="@android:drawable/ic_menu_send" />
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="newContent,save" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

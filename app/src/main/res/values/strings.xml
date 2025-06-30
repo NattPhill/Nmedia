@@ -14,4 +14,7 @@
     <string name="editing">Редактирование</string>
     <string name="sample_text" translatable="false">sample_text</string>
     <string name="cancel">cancel</string>
+    <string name="chooser_share_post" translatable="false">Share post</string>
+    <string name="error_empty_content">Контент не может быть пустым</string>
+    <string name="save">Save</string>
 </resources>
