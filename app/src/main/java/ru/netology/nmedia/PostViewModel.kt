@@ -37,12 +37,16 @@ class PostViewModel : ViewModel() {
         _data.value = repository.getAll()
     }
 
-    fun save() {
-        edited.value?.let {
-            repository.save(it)
-            _data.value = repository.getAll()
+    fun save(id: Long) {
+        val post = edited.value ?: return
+        val updated = if (id == 0L) {
+            post.copy(id = 0L)
+        } else {
+            post.copy(id = id)
         }
-        edited.value = empty  //очистка состояния редактирования
+            repository.save(updated)
+            _data.value = repository.getAll()
+            edited.value = empty  //очистка состояния редактирования
     }
 
     fun edit(post: Post) {

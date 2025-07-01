@@ -24,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels() // Создаем ViewModel
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
             result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
+            val (id, content) = result
+            viewModel.edit(Post(id = id, content = content, author = "", likedByMe = false, published = ""))
+            viewModel.changeContent(content)
+            viewModel.save(id)
         }
 
         val adapter = PostAdapter(object : OnInteractionListener {
@@ -50,8 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onEdit(post: Post) {
-                viewModel.edit(post)
-                showEditPanel(binding, post.content)
+                newPostLauncher.launch(post.id to post.content)
             }
 
         })
@@ -62,32 +63,10 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.save.setOnClickListener {
-            newPostLauncher.launch()
+            newPostLauncher.launch(0L to "")
         }
 
 
-//        binding.cancelButton.setOnClickListener {
-//            binding.editingPanel.visibility = View.GONE
-//            viewModel.cancelEdit()
-//        }
-//////////////////////////////////
-//        viewModel.edited.observe(this) { post ->
-//            if (post.id == 0L) {
-//                return@observe
-//            }
-//
-//            binding.editingPanel.visibility = View.VISIBLE
-//
-//            val cancelEditing: View = binding.editingPanel
-//            val cancelButton: ImageButton = binding.cancelButton
-//                /////////////////////////
-//            cancelButton.setOnClickListener {
-//                binding.editingPanel.visibility = View.GONE     //скрыть окно
-//                AndroidUtils.hideKeyboard(cancelEditing)
-//                viewModel.cancelEdit()     //отмена редактирования
-//            }
-//        }
-/////////////////////////////////////////////
         // Подписываемся на изменения в списке постов
         viewModel.data.observe(this) { posts ->
             val new = adapter.currentList.size < posts.size

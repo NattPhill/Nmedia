@@ -1,5 +1,8 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.net.Uri
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
@@ -15,7 +18,6 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            //numberOfShare.text = formatCount(post.sharesCount)
             like.isChecked = post.likedByMe
             like.text = post.likesCount.toString()
             share.text = post.sharesCount.toString()
@@ -23,6 +25,7 @@ class PostViewHolder(
 
             like.setOnClickListener { onInteractionListener.onLike(post) }
             share.setOnClickListener { onInteractionListener.onShare(post) }
+
 
             options.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -46,6 +49,20 @@ class PostViewHolder(
                     }
                 }.show()
             }
+
+            if (post.video != null) {
+                videoPreview.visibility = View.VISIBLE
+
+                // ри клике на Play
+                videoGroup.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                    it.context.startActivity(intent)
+                }
+
+            } else {
+                videoGroup.visibility = View.GONE
+            }
+
         }
     }
 

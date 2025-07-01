@@ -9,7 +9,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             author = "Нетология",
             content = "Знаний хватит на всех.",
             published = "18 сентября в 10:12",
-            likedByMe = false
+            likedByMe = false,
+            video = "https://www.youtube.com/watch?v=r7qz2VadHVA&ab_channel=OHMYDOG%21"
         ),
         Post(
             id = 1,

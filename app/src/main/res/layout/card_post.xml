@@ -66,12 +66,38 @@
         app:layout_constraintTop_toBottomOf="@id/barrier6"
         tools:layout_editor_absoluteY="319dp" />
 
+    <FrameLayout
+        android:id="@+id/videoGroup"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/videoPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/video"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="399dp" />
+
+        <ImageView
+            android:id="@+id/playButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="videoGroup" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
@@ -82,7 +108,7 @@
         android:layout_marginTop="16dp"
         app:icon="@drawable/like_selector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/videoGroup" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
@@ -93,7 +119,7 @@
         android:layout_marginTop="16dp"
         app:icon="?attr/actionModeShareDrawable"
         app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/videoGroup" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/views"
@@ -103,8 +129,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/videoGroup"
         app:icon="@drawable/baseline_visibility_24" />
+
 
 
 

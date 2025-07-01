@@ -17,20 +17,42 @@ class NewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val textToEdit = intent.getStringExtra("text")
+        val postId = intent.getLongExtra("id", 0L)
+
+        if(!textToEdit.isNullOrBlank()) {
+            binding.edit.setText(textToEdit)
+        }
+
         binding.ok.setOnClickListener {
             val text = binding.edit.text.toString()
             if (text.isBlank()) {
                 setResult(RESULT_CANCELED)
             } else {
-                setResult(RESULT_OK, Intent().apply { putExtra("text", text) })
+                val resultIntent = Intent().apply {
+                    putExtra("text", text)
+                    putExtra("id", postId)
+                }
+                setResult(RESULT_OK, resultIntent)
             }
             finish()
         }
     }
 }
 
-object NewPostContract: ActivityResultContract<Unit, String?>() {
-    override fun createIntent(context: Context, input: Unit)= Intent (context, NewPostActivity::class.java)
+object NewPostContract: ActivityResultContract<Pair<Long, String>?,  Pair<Long, String>?>() {
+    override fun createIntent(context: Context, input: Pair <Long, String>?): Intent {
+        return Intent(context, NewPostActivity::class.java).apply {
+        putExtra("id", input?.first ?: 0L)
+            putExtra("text", input?.second ?: "")
+        }
+    }
 
-    override fun parseResult(resultCode: Int, intent: Intent?) = intent?.getStringExtra("text")
+    override fun parseResult(resultCode: Int, intent: Intent?): Pair<Long, String>? {
+        if (resultCode != Activity.RESULT_OK) return null
+        val text = intent?.getStringExtra("text") ?: return null
+        val id = intent.getLongExtra("id", 0L)
+        return id to text
+    }
 }
