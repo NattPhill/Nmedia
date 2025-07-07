@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -25,9 +26,10 @@ class MainActivity : AppCompatActivity() {
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
             result ?: return@registerForActivityResult
             val (id, content) = result
-            viewModel.edit(Post(id = id, content = content, author = "", likedByMe = false, published = ""))
-            viewModel.changeContent(content)
-            viewModel.save(id)
+            val post = viewModel.getById(id)
+            viewModel.edit(post.copy(content = content))
+//            viewModel.changeContent(content)
+            viewModel.save()
         }
 
         val adapter = PostAdapter(object : OnInteractionListener {
@@ -55,11 +57,23 @@ class MainActivity : AppCompatActivity() {
                 newPostLauncher.launch(post.id to post.content)
             }
 
+            override fun onVideo(post: Post) {
+                post.video?.let {
+
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                    val packageManager = packageManager
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Приложение для видео не найдено", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
         })
 
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(this)
-
 
 
         binding.save.setOnClickListener {

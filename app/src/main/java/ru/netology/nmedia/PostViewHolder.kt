@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
@@ -53,15 +54,15 @@ class PostViewHolder(
             if (post.video != null) {
                 videoPreview.visibility = View.VISIBLE
 
-                // ри клике на Play
+                // при клике на Play
                 videoGroup.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-                    it.context.startActivity(intent)
+                    onInteractionListener.onVideo(post)
                 }
 
             } else {
                 videoGroup.visibility = View.GONE
             }
+
 
         }
     }
