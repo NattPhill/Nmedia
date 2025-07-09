@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(this)
 
-
         binding.save.setOnClickListener {
             newPostLauncher.launch(0L to "")
         }
