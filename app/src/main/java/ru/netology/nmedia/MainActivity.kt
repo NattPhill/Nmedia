@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             newPostLauncher.launch(0L to "")
         }
 
-
         // Подписываемся на изменения в списке постов
         viewModel.data.observe(this) { posts ->
             val new = adapter.currentList.size < posts.size
