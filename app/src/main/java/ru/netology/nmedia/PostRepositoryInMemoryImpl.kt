@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -24,7 +25,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
     private val data = MutableLiveData(posts)
     private var nextId = (posts.maxOfOrNull { it.id } ?: 0) + 1
 
-    override fun getAll(): List<Post> = posts
+    override fun getAll(): LiveData<List<Post>> = data
 
     //создаем новый пост
     override fun save(post: Post) {

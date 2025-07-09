@@ -17,7 +17,7 @@ private val empty = Post(
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryFilesImpl(application)
     private val _data = MutableLiveData(repository.getAll())
-    val data: LiveData<List<Post>> = _data
+    val data: LiveData<List<Post>> = repository.getAll()
 
     val edited = MutableLiveData(empty)
 
@@ -47,7 +47,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //            post.copy(id = id)
 //        }
             repository.save(post)
-            _data.value = repository.getAll()
+        _data.value = repository.getAll()
             edited.value = empty  //очистка состояния редактирования
     }
 
