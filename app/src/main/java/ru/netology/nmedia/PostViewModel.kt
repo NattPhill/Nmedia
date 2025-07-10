@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 private val empty = Post(
     id = 0,
@@ -46,9 +45,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //        } else {
 //            post.copy(id = id)
 //        }
-            repository.save(post)
+        repository.save(post)
         _data.value = repository.getAll()
-            edited.value = empty  //очистка состояния редактирования
+        edited.value = empty  //очистка состояния редактирования
     }
 
     fun edit(post: Post) {

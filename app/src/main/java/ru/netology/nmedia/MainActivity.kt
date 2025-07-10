@@ -4,11 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                     putExtra(Intent.EXTRA_TEXT, post.content)
                 }
 
-                val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
 
                 startActivity(shareIntent)
             }
@@ -65,7 +63,11 @@ class MainActivity : AppCompatActivity() {
                     if (intent.resolveActivity(packageManager) != null) {
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this@MainActivity, "Приложение для видео не найдено", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Приложение для видео не найдено",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

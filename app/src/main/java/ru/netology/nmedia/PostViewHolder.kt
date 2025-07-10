@@ -1,8 +1,5 @@
 package ru.netology.nmedia
 
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView

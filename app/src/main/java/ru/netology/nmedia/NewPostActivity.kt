@@ -4,12 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import ru.netology.nmedia.databinding.ActivityNewPostBinding
 
 class NewPostActivity : AppCompatActivity() {
@@ -21,7 +17,7 @@ class NewPostActivity : AppCompatActivity() {
         val textToEdit = intent.getStringExtra("text")
         val postId = intent.getLongExtra("id", 0L)
 
-        if(!textToEdit.isNullOrBlank()) {
+        if (!textToEdit.isNullOrBlank()) {
             binding.edit.setText(textToEdit)
         }
 
@@ -41,10 +37,10 @@ class NewPostActivity : AppCompatActivity() {
     }
 }
 
-object NewPostContract: ActivityResultContract<Pair<Long, String>?,  Pair<Long, String>?>() {
-    override fun createIntent(context: Context, input: Pair <Long, String>?): Intent {
+object NewPostContract : ActivityResultContract<Pair<Long, String>?, Pair<Long, String>?>() {
+    override fun createIntent(context: Context, input: Pair<Long, String>?): Intent {
         return Intent(context, NewPostActivity::class.java).apply {
-        putExtra("id", input?.first ?: 0L)
+            putExtra("id", input?.first ?: 0L)
             putExtra("text", input?.second ?: "")
         }
     }

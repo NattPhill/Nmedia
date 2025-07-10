@@ -1,7 +1,6 @@
 package ru.netology.nmedia
 
 import android.content.Context
-import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -16,7 +15,7 @@ class PostRepositoryFilesImpl(private val context: Context) : PostRepository {
             sinc()
         }
 
-    private val  data = MutableLiveData<List<Post>>()
+    private val data = MutableLiveData<List<Post>>()
 
     private var nextId = 1L
 

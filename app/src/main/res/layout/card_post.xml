@@ -133,6 +133,4 @@
         app:icon="@drawable/baseline_visibility_24" />
 
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

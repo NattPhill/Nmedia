@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Widget.App.LikeCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
-       <item name="buttonTint">@color/like_color</item>
+        <item name="buttonTint">@color/like_color</item>
     </style>
 
     <style name="Widget.App.LikedButton" parent="Widget.Material3.Button.TextButton.Icon">

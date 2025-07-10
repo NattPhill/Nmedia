@@ -16,10 +16,10 @@ class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
     private var nextId = 1L
 
     init {
-       prefs.getString(KEY_POSTS, null)?.let {
-           posts = gson.fromJson(it, type) as List<Post>
-           nextId = (posts.maxOfOrNull { it.id } ?: 0) + 1
-       }
+        prefs.getString(KEY_POSTS, null)?.let {
+            posts = gson.fromJson(it, type) as List<Post>
+            nextId = (posts.maxOfOrNull { it.id } ?: 0) + 1
+        }
     }
 
     override fun getAll(): LiveData<List<Post>> = data
